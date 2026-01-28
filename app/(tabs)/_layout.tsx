@@ -1,35 +1,72 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from "expo-router";
+import {StyleSheet}  from "react-native"
+import "../global.css";
+import { ImageBackground } from "react-native";
+import { images } from "@/constants/images";
+import { icons } from "@/constants/icons";
+export default function TabsLayout() {
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+    const tableICons=()=>{
+        return(
+            <ImageBackground
+             source={images.highlight}
+            >
+                <Image source={icons.home} tintColor="#151312" 
+                
+                />
+                
+            </ImageBackground>
+        )
+    }
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
+    <Tabs screenOptions={{ headerShown: false }}>
+      <Tabs.Screen name="index"
+      options={{
+        title:'Home',
+        headerShown:false,
+        tabBarIcon:({
+            focus
+        })=>{
+            <>
+            <ImageBackground 
+             source={images.highlight}
+            >
+                
+            </ImageBackground>
+            </>
+        }
+      }}
+      
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+      <Tabs.Screen name="search" />
+      <Tabs.Screen name="saved" />
+      <Tabs.Screen name="profile" />
     </Tabs>
   );
 }
+
+
+
+
+
+const styles = StyleSheet.create({
+  btnBg: {
+     display:"flex",
+     flexDirection:"row",
+     width:"100%",
+     minWidth:"112px",
+     
+
+
+
+     
+
+  },
+  title: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "700",
+  },
+});
